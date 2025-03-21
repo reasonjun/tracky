@@ -14,4 +14,8 @@ class CameraRepository {
   Future<CameraController> initializeCamera(CameraDescription camera) {
     return _cameraService.initializeCamera(camera);
   }
+
+  Future<bool?> savePicture(String imagePath) {
+    return _cameraService.savePicture(imagePath);
+  }
 }

@@ -1,4 +1,3 @@
-// lib/ui/camera/view_model/camera_view_model.dart
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import '../../../data/repositories/camera_repository.dart';
@@ -38,6 +37,12 @@ class CameraViewModel extends ChangeNotifier {
     }
     try {
       final image = await _controller!.takePicture();
+      final saveResult = await _cameraRepository.savePicture(image.path);
+      if (saveResult != true) {
+        error = '사진 저장에 실패했습니다.';
+        notifyListeners();
+        return null;
+      }
       return image.path;
     } catch (e) {
       error = e.toString();
